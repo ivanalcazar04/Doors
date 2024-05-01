@@ -1,0 +1,151 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class RECT{
+-px
+-py
+-dx
+-dy
++onClick(x,y)
++onMove(x,y)
++onKeyPress(key)
++Draw_Border(x,y,dx,dy)
++Draw_pic(x,y,dx,dy,pic)
++Draw_fill(x,y,dy,color)
++Draw_text(x,y,text)
+}
+
+class pestaña {
+-Titulo
+-Barra Informativa
+-Cuerpo
++Ver
+}
+
+class Titulo {
+-titulo pestaña
+-lupa
+-">"
+-"<"
+-modificadorDeLaPestaña
++desplazarPestaña()
++seleccionarOpcion()
+}
+
+class Rojo {
+-color
+-forma
++cerrarPestaña()
+}
+
+class Amarillo {
+-color
+-forma
++minimizarPestaña()
+}
+
+class Verde {
+-color
+-forma
++maximizarPestaña()
+}
+
+class modificadorDeLaPestaña{
+-Rojo
+-Amarillo
+-Verde
+}
+
+class cuerpo {
+-cuadro de texto
+-cuadro de dibujo
+-documentos
+-opciones
+}
+
+class cuadroTexto {
+-UR
+-Ul
+-DR
+-DL
+-posicion
+}
+
+class cuadroDibujo {
+-UR
+-Ul
+-DR
+-DL
+-posicion
+}
+
+
+class Posicion {
+-px
+-py
++Posicion(px,py)
+}
+
+
+class Opciones {
+-op1
+-op2
+-op3
+-op4
+-titulo
+-dibujo
++Opciones(px,py)
++buscar()
++verDocumentos()
++compartir()
++reproducir()
+}
+
+class documento{
+-titulo
+-imagen
++editarTitulo()
++seleccionarDocumento()
++enviarDocumento()
+}
+
+class barraInformativa {
+-información
+-fecha
+-hora
+}
+
+class buscar {
+-lupa
++buscar(texto)
+}
+
+class cambioDePagina {
+-atras
+-adelante
++paginaAnterior()
++paginaPosterior()
+}
+
+
+Titulo..>RECT
+Titulo--* pestaña
+modificadorDeLaPestaña *-- Rojo
+modificadorDeLaPestaña *-- Amarillo
+modificadorDeLaPestaña *-- Verde
+modificadorDeLaPestaña --o Titulo
+cuadroTexto --* cuerpo
+Opciones --* cuerpo
+cuadroTexto ..>Posicion
+barraInformativa -* pestaña
+buscar --o Titulo
+cuadroTexto <.buscar
+cambioDePagina --o Titulo
+documento --* cuerpo
+cuerpo --* pestaña
+cuerpo ..> RECT
+cuadroDibujo ..> RECT
+cuadroDibujo --* cuerpo
+cuadroDibujo ..> Posicion
+
+@enduml
